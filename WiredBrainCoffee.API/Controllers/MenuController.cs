@@ -8,6 +8,7 @@ using WiredBrainCoffee.Models;
 
 namespace WiredBrainCoffee.Api.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
     [Route("[controller]")]
     public class MenuController : ControllerBase

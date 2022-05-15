@@ -1,0 +1,23 @@
+{
+    "id": 0,
+    "description": "string",
+    "orderNumber": 0,
+    "promoCode": "string",
+    "items": [
+      {
+        "id": 0,
+        "name": "string",
+        "price": 0,
+        "extras": {
+          "id": 0,
+          "milk": "string",
+          "flavor": "string",
+          "creamer": 0,
+          "topping": "string",
+          "notes": "string"
+        }
+      }
+    ],
+    "created": "2022-05-08T10:04:29.533Z",
+    "total": 0
+  }

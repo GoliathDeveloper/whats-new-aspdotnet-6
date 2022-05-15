@@ -16,6 +16,9 @@ namespace WiredBrainCoffee.UI.Pages
         public IMenuService MenuService { get; set; }
 
         [Inject]
+        public IOrderService OrderService { get; set; }
+
+        [Inject]
         public NavigationManager NavManager { get; set; }
         
         [CascadingParameter] 
@@ -73,24 +76,37 @@ namespace WiredBrainCoffee.UI.Pages
 
         private async Task PlaceOrder()
         {
+            Console.WriteLine("Placing Order");
             var promoModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/promocode.js");
             IsValidPromoCode = await promoModule.InvokeAsync<bool>("VerifyPromoCode", PromoCode);
 
             if (string.IsNullOrEmpty(PromoCode) || IsValidPromoCode)
             {
+                Random rnd = new Random();
+                Models.Order order = new Models.Order()
+                {
+                    
+                    Id = rnd.Next(),
+                    Description = "Order: Testing",
+                    OrderNumber = rnd.Next(),
+                    PromoCode = PromoCode,
+                    Items = CurrentOrder,
+                    Created = DateTime.Now,
+                    Total = OrderTotal
+                };
+                var accepted = await OrderService.PlaceOrder(order);
+                Console.WriteLine("Order Accepted:" + accepted);
                 NavManager.NavigateTo("order-confirmation");
             } 
             else
             {
                 IsValidPromoCode = false;
             }
-            
         }
 
         protected async override Task OnInitializedAsync()
         {
             var menuItems = await MenuService.GetMenuItems();
-            
             FoodMenuItems = menuItems.Where(x => x.Category == "Food").ToList();
             CoffeeMenuItems = menuItems.Where(x => x.Category == "Coffee").ToList();
         }

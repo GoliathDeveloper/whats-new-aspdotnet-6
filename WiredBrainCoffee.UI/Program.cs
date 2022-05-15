@@ -29,7 +29,7 @@ builder.Services.AddHttpClient<IMenuService, MenuService>(client =>
 builder.Services.AddHttpClient<IContactService, ContactService>(client =>
     client.BaseAddress = new Uri("https://localhost:7024/"));
 builder.Services.AddHttpClient<IOrderService, OrderService>(client =>
-    client.BaseAddress = new Uri("https://localhost:9991/"));
+    client.BaseAddress = new Uri("https://localhost:7024/"));
 
 var host = builder.Build();
 

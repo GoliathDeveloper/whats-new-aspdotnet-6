@@ -19,6 +19,7 @@ namespace WiredBrainCoffee.Api.Controllers
         }
 
         [HttpPost()]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public void Post(Contact contact)
         {
             // Todo: Save contact info to the database
